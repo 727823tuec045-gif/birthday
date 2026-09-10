@@ -1,0 +1,1303 @@
+/* =========================================================
+   FRIENDSHIP TREE — CINEMATIC FINAL SECTION
+   ========================================================= */
+
+.friendship-tree-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 900px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 55%,
+      rgba(91, 48, 91, 0.35) 0%,
+      rgba(27, 15, 42, 0.25) 38%,
+      rgba(3, 4, 12, 1) 80%
+    ),
+    linear-gradient(
+      180deg,
+      #03040c 0%,
+      #090719 45%,
+      #120b1c 100%
+    );
+  color: #fff;
+  isolation: isolate;
+}
+
+/* =========================================================
+   SKY
+   ========================================================= */
+
+.tree-sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Moon */
+
+.moon {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  right: 8%;
+  top: 10%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #ffffff 0%,
+      #e8edff 45%,
+      #c4cce5 75%,
+      #9ca6c6 100%
+    );
+
+  box-shadow:
+    0 0 25px rgba(218, 225, 255, 0.55),
+    0 0 70px rgba(148, 160, 255, 0.3),
+    0 0 130px rgba(126, 112, 255, 0.12);
+}
+
+/* Stars */
+
+.star {
+  position: absolute;
+
+  width: 2px;
+  height: 2px;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  opacity: 0.5;
+
+  animation:
+    starTwinkle
+    3s
+    ease-in-out
+    infinite;
+}
+
+.star:nth-child(3n) {
+  width: 3px;
+  height: 3px;
+}
+
+.star:nth-child(5n) {
+  animation-duration: 4.5s;
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+/* =========================================================
+   FIREFLIES
+   ========================================================= */
+
+.firefly {
+  position: absolute;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #ffd98a;
+
+  box-shadow:
+    0 0 7px #ffc65d,
+    0 0 18px rgba(255, 188, 72, 0.7),
+    0 0 35px rgba(255, 157, 51, 0.3);
+
+  animation:
+    fireflyFloat
+    5s
+    ease-in-out
+    infinite;
+}
+
+@keyframes fireflyFloat {
+  0% {
+    transform: translate(0, 0) scale(0.7);
+    opacity: 0.15;
+  }
+
+  25% {
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translate(18px, -28px) scale(1.2);
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translate(-12px, -5px) scale(0.7);
+    opacity: 0.15;
+  }
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.tree-title {
+  position: absolute;
+
+  left: 4%;
+  top: 17%;
+
+  width: 220px;
+
+  z-index: 50;
+
+  pointer-events: none;
+}
+
+.tree-title span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 5px;
+
+  color: rgba(255, 218, 168, 0.75);
+}
+
+.tree-title h2 {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 30px;
+
+  font-weight: 400;
+
+  letter-spacing: 1px;
+
+  color: #f5e6c8;
+
+  text-shadow:
+    0 0 15px rgba(255, 198, 120, 0.18);
+}
+
+.tree-title h3 {
+  margin: -5px 0 17px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 45px;
+
+  font-weight: 400;
+
+  font-style: italic;
+
+  color: #dcb37b;
+}
+
+.tree-title p {
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 9px;
+
+  line-height: 1.9;
+
+  letter-spacing: 0.4px;
+
+  color: rgba(255, 239, 211, 0.68);
+}
+
+/* =========================================================
+   CAMERA
+   ========================================================= */
+
+.tree-camera {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  z-index: 5;
+
+  perspective: 1400px;
+}
+
+.tree-world {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  left: 0;
+  top: 0;
+
+  --camera-x: 0%;
+  --camera-y: 0%;
+
+  transform:
+    translate3d(
+      var(--camera-x),
+      var(--camera-y),
+      0
+    )
+    scale(1);
+
+  transform-origin: center center;
+
+  transition:
+    transform
+    5.8s
+    cubic-bezier(0.55, 0.05, 0.25, 1);
+
+  will-change: transform;
+}
+
+/* =========================================================
+   TREE ART
+   ========================================================= */
+
+.tree-art {
+  position: absolute;
+
+  width: min(1100px, 94vw);
+  height: min(830px, 94vh);
+
+  left: 50%;
+  top: 54%;
+
+  transform:
+    translate(-50%, -48%);
+}
+
+/* =========================================================
+   CANOPY
+   ========================================================= */
+
+.canopy {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(2px);
+
+  z-index: 2;
+}
+
+/* Large left canopy */
+
+.canopy-1 {
+  width: 610px;
+  height: 330px;
+
+  left: 7%;
+  top: 7%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(76, 41, 94, 0.95) 0%,
+      rgba(60, 29, 79, 0.8) 35%,
+      rgba(29, 17, 48, 0.25) 72%,
+      transparent 100%
+    );
+}
+
+/* Large right canopy */
+
+.canopy-2 {
+  width: 600px;
+  height: 330px;
+
+  right: 5%;
+  top: 9%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(78, 41, 94, 0.95) 0%,
+      rgba(57, 28, 76, 0.78) 40%,
+      rgba(26, 15, 44, 0.2) 75%,
+      transparent 100%
+    );
+}
+
+/* Top center */
+
+.canopy-3 {
+  width: 520px;
+  height: 300px;
+
+  left: 27%;
+  top: -4%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(92, 49, 103, 0.9),
+      rgba(48, 24, 66, 0.55) 50%,
+      transparent 75%
+    );
+}
+
+/* Lower left */
+
+.canopy-4 {
+  width: 500px;
+  height: 300px;
+
+  left: -4%;
+  top: 28%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(53, 29, 75, 0.85),
+      transparent 72%
+    );
+}
+
+/* Lower right */
+
+.canopy-5 {
+  width: 500px;
+  height: 300px;
+
+  right: -4%;
+  top: 29%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(56, 29, 73, 0.85),
+      transparent 72%
+    );
+}
+
+/* =========================================================
+   BRANCHES / TREE
+   ========================================================= */
+
+.branches {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: visible;
+
+  z-index: 7;
+
+  pointer-events: none;
+}
+
+/* Main trunk */
+
+.main-branch {
+  fill: none;
+
+  stroke: #241616;
+
+  stroke-width: 58;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  filter:
+    drop-shadow(
+      0 8px 12px rgba(0, 0, 0, 0.65)
+    );
+}
+
+/* Major branches */
+
+.major-branch {
+  fill: none;
+
+  stroke: #291817;
+
+  stroke-width: 32;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  filter:
+    drop-shadow(
+      0 5px 7px rgba(0, 0, 0, 0.55)
+    );
+}
+
+/* Secondary */
+
+.secondary-branch {
+  fill: none;
+
+  stroke: #351d1c;
+
+  stroke-width: 14;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+}
+
+/* Roots */
+
+.root {
+  fill: none;
+
+  stroke: #241616;
+
+  stroke-width: 30;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  filter:
+    drop-shadow(
+      0 4px 6px rgba(0, 0, 0, 0.55)
+    );
+}
+
+/* =========================================================
+   BARK LIGHT
+   ========================================================= */
+
+.branches path {
+  filter:
+    drop-shadow(
+      0 0 5px rgba(180, 103, 55, 0.13)
+    );
+}
+
+/* =========================================================
+   TRUNK GLOW
+   ========================================================= */
+
+.trunk-glow {
+  position: absolute;
+
+  width: 270px;
+  height: 520px;
+
+  left: 50%;
+  bottom: 3%;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 4;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(190, 93, 45, 0.24) 0%,
+      rgba(140, 66, 43, 0.1) 45%,
+      transparent 72%
+    );
+
+  filter: blur(28px);
+}
+
+/* Roots glow */
+
+.root-light {
+  position: absolute;
+
+  width: 650px;
+  height: 130px;
+
+  left: 50%;
+  bottom: -5px;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 4;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 177, 79, 0.22),
+      transparent 70%
+    );
+
+  filter: blur(18px);
+}
+
+/* =========================================================
+   MEMORY LAYER
+   ========================================================= */
+
+.memory-layer {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 30;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   MEMORY NODE
+   ========================================================= */
+
+.memory-node {
+  position: absolute;
+
+  width: 64px;
+  height: 76px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--rotation));
+
+  transition:
+    left 5.5s cubic-bezier(0.55, 0.05, 0.25, 1),
+    top 5.5s cubic-bezier(0.55, 0.05, 0.25, 1),
+    transform 1.2s ease;
+
+  will-change:
+    left,
+    top,
+    transform;
+}
+
+/* Little hanging connector */
+
+.photo-branch {
+  position: relative;
+  width: 100%;
+  height: 76px;
+}
+
+.photo-branch::before {
+  content: "";
+
+  position: absolute;
+
+  width: 2px;
+  height: 15px;
+
+  left: 50%;
+  top: -13px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 204, 126, 0.3),
+      rgba(180, 106, 54, 0.8)
+    );
+
+  box-shadow:
+    0 0 4px rgba(255, 183, 81, 0.2);
+}
+
+/* =========================================================
+   PHOTO FRAME
+   ========================================================= */
+
+.memory-photo {
+  position: relative;
+
+  width: 60px;
+  height: 60px;
+
+  padding: 3px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffe9ad 0%,
+      #bd7844 25%,
+      #70452f 52%,
+      #f2ba69 78%,
+      #ffe4a2 100%
+    );
+
+  box-shadow:
+    0 0 7px rgba(255, 201, 112, 0.7),
+    0 0 20px rgba(255, 162, 55, 0.35),
+    0 0 40px rgba(255, 147, 43, 0.12),
+    inset 0 0 5px rgba(255, 255, 255, 0.35);
+
+  transition:
+    box-shadow 1s ease,
+    transform 1s ease;
+}
+
+/* Inner photo */
+
+.memory-photo img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  background: #100c16;
+
+  image-rendering: auto;
+
+  filter: none;
+
+  transition:
+    transform 1s ease;
+}
+
+/* =========================================================
+   MEMORY NUMBER
+   ========================================================= */
+
+.memory-number {
+  position: absolute;
+
+  left: 50%;
+  bottom: -2px;
+
+  transform:
+    translateX(-50%);
+
+  min-width: 20px;
+
+  padding: 2px 5px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(12, 9, 15, 0.95);
+
+  border:
+    1px solid rgba(255, 204, 135, 0.6);
+
+  color: #ffe0a4;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 7px;
+
+  line-height: 1;
+
+  letter-spacing: 1px;
+
+  text-align: center;
+
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================================
+   ACTIVE MEMORY
+   ========================================================= */
+
+.active-memory {
+  z-index: 200;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(0deg)
+    scale(2.8);
+
+  transition:
+    transform 1.2s
+    cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.active-memory .memory-photo {
+  box-shadow:
+    0 0 20px rgba(255, 221, 157, 0.95),
+    0 0 45px rgba(255, 179, 71, 0.8),
+    0 0 90px rgba(255, 151, 49, 0.4);
+
+  transform:
+    translateY(-2px);
+}
+
+.active-memory .memory-number {
+  opacity: 0;
+}
+
+/* =========================================================
+   LANTERNS
+   ========================================================= */
+
+.lantern {
+  position: absolute;
+
+  z-index: 20;
+
+  width: 20px;
+  height: 30px;
+
+  color: #ffd58b;
+
+  font-size: 16px;
+
+  text-align: center;
+
+  text-shadow:
+    0 0 8px #ffbc58,
+    0 0 20px #ff9b38,
+    0 0 35px rgba(255, 145, 41, 0.4);
+
+  animation:
+    lanternSwing
+    3s
+    ease-in-out
+    infinite;
+
+  transform-origin:
+    top center;
+}
+
+.lantern::before {
+  content: "";
+
+  position: absolute;
+
+  width: 1px;
+  height: 20px;
+
+  left: 50%;
+  top: -20px;
+
+  background:
+    rgba(220, 158, 93, 0.7);
+}
+
+.lantern-1 {
+  left: 24%;
+  top: 38%;
+}
+
+.lantern-2 {
+  left: 74%;
+  top: 34%;
+
+  animation-delay: 1s;
+}
+
+.lantern-3 {
+  left: 42%;
+  top: 24%;
+
+  animation-delay: 1.5s;
+}
+
+.lantern-4 {
+  left: 84%;
+  top: 46%;
+
+  animation-delay: 0.5s;
+}
+
+@keyframes lanternSwing {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+/* =========================================================
+   GROUND
+   ========================================================= */
+
+.ground-glow {
+  position: absolute;
+
+  width: 750px;
+  height: 150px;
+
+  left: 50%;
+  bottom: -20px;
+
+  transform:
+    translateX(-50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 175, 82, 0.18),
+      transparent 70%
+    );
+
+  filter: blur(18px);
+
+  z-index: 3;
+}
+
+/* =========================================================
+   MEMORY CAPTION
+   ========================================================= */
+
+.memory-caption {
+  position: absolute;
+
+  left: 50%;
+  bottom: 7%;
+
+  transform:
+    translateX(-50%);
+
+  width: min(90vw, 560px);
+  z-index: 500;
+
+  text-align: center;
+
+  pointer-events: none;
+
+  animation:
+    captionAppear
+    1s
+    ease
+    forwards;
+}
+
+.memory-caption span {
+  font-family: Arial, sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 0.28em;
+
+  color: #e6bb7b;
+}
+
+.memory-caption p {
+  margin: 12px auto 0;
+  max-width: 520px;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(13px, 1.4vw, 17px);
+  line-height: 1.55;
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 242, 218, 0.9);
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.memory-caption p span {
+  display: block;
+}
+
+@keyframes captionAppear {
+  from {
+    opacity: 0;
+    transform:
+      translate(-50%, 20px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translate(-50%, 0);
+  }
+}
+
+/* =========================================================
+   FINAL MESSAGE
+   ========================================================= */
+
+.tree-final-message {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  text-align: center;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(24, 14, 35, 0.25),
+      rgba(2, 3, 9, 0.55)
+    );
+
+  animation:
+    finalReveal
+    3s
+    ease
+    forwards;
+}
+
+.tree-final-message span {
+  margin: 4px 0;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+
+  letter-spacing: 5px;
+
+  color: rgba(255, 232, 195, 0.8);
+}
+
+.tree-final-message h1 {
+  margin: 30px 0 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(32px, 5vw, 65px);
+
+  font-weight: 400;
+
+  color: #ffe4b1;
+
+  text-shadow:
+    0 0 20px rgba(255, 193, 100, 0.35),
+    0 0 60px rgba(255, 166, 64, 0.15);
+}
+
+@keyframes finalReveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   FINAL CHAPTER LABEL
+   ========================================================= */
+
+.tree-label {
+  position: absolute;
+
+  right: 3%;
+  top: 5%;
+
+  z-index: 60;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 8px;
+
+  letter-spacing: 4px;
+
+  color: rgba(255, 225, 180, 0.5);
+}
+
+/* =========================================================
+   TREE INTRO
+   ========================================================= */
+
+/*
+   The entire tree starts slightly hidden.
+   When IntersectionObserver adds tree-started,
+   the tree becomes visible.
+*/
+
+.friendship-tree-section:not(.tree-started) .tree-art {
+  opacity: 0;
+
+  transform:
+    translate(-50%, -45%)
+    scale(0.94);
+
+  filter:
+    brightness(0.25);
+
+  transition:
+    opacity 2s ease,
+    transform 2.5s ease,
+    filter 2.5s ease;
+}
+
+.friendship-tree-section.tree-started .tree-art {
+  opacity: 1;
+
+  transform:
+    translate(-50%, -48%)
+    scale(1);
+
+  filter:
+    brightness(1);
+
+  transition:
+    opacity 2s ease,
+    transform 2.5s ease,
+    filter 2.5s ease;
+}
+
+/* =========================================================
+   DESKTOP LARGE SCREEN
+   ========================================================= */
+
+@media (min-width: 1400px) {
+  .tree-art {
+    width: 1200px;
+    height: 900px;
+  }
+
+  .memory-node {
+    width: 68px;
+    height: 80px;
+  }
+
+  .memory-photo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .tree-title {
+    left: 5%;
+    top: 19%;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+  .tree-title {
+    left: 25px;
+    top: 10%;
+  }
+
+  .tree-title h2 {
+    font-size: 23px;
+  }
+
+  .tree-title h3 {
+    font-size: 36px;
+  }
+
+  .tree-art {
+    width: 950px;
+    height: 780px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .friendship-tree-section {
+    min-height: 820px;
+  }
+
+  .moon {
+    width: 65px;
+    height: 65px;
+
+    right: 7%;
+    top: 7%;
+  }
+
+  .tree-title {
+    left: 18px;
+    top: 8%;
+
+    width: 160px;
+  }
+
+  .tree-title span {
+    font-size: 7px;
+
+    letter-spacing: 3px;
+  }
+
+  .tree-title h2 {
+    font-size: 20px;
+  }
+
+  .tree-title h3 {
+    margin-top: -3px;
+
+    font-size: 31px;
+  }
+
+  .tree-title p {
+    font-size: 7px;
+
+    line-height: 1.7;
+  }
+
+  .tree-art {
+    width: 900px;
+    height: 720px;
+
+    top: 57%;
+  }
+
+  .memory-node {
+    width: 50px;
+    height: 60px;
+  }
+
+  .memory-photo {
+    width: 47px;
+    height: 47px;
+  }
+
+  .photo-branch {
+    height: 60px;
+  }
+
+  .memory-number {
+    font-size: 6px;
+
+    min-width: 17px;
+
+    padding: 2px 4px;
+  }
+
+  .active-memory {
+    transform:
+      translate(-50%, -50%)
+      rotate(0deg)
+      scale(2.8);
+  }
+
+  .memory-caption {
+    bottom: 4%;
+  }
+
+  .memory-caption span {
+    font-size: 7px;
+
+    letter-spacing: 3px;
+  }
+
+  .memory-caption p {
+    font-size: 12px;
+  }
+
+  .tree-final-message span {
+    font-size: 8px;
+
+    letter-spacing: 3px;
+  }
+
+  .tree-final-message h1 {
+    font-size: 32px;
+
+    margin-top: 25px;
+  }
+
+  .tree-label {
+    font-size: 6px;
+
+    letter-spacing: 2px;
+
+    right: 18px;
+    top: 4%;
+  }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .tree-art {
+    width: 850px;
+  }
+
+  .tree-title {
+    width: 145px;
+  }
+
+  .tree-title h2 {
+    font-size: 18px;
+  }
+
+  .tree-title h3 {
+    font-size: 28px;
+  }
+
+  .active-memory {
+    transform:
+      translate(-50%, -50%)
+      scale(2.8);
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .star,
+  .firefly,
+  .lantern {
+    animation: none !important;
+  }
+
+  .tree-world,
+  .memory-node,
+  .memory-photo,
+  .tree-art {
+    transition: none !important;
+  }
+}
